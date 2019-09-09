@@ -2,8 +2,13 @@
   "name": "margiebot-rostas-lab",
   "version": "1.0.0",
   "description": "A bot for the Sustainable Social Computing lab!",
-  "main": "index.js",
+  "main": "dist/server.js",
+  "engines": {
+    "node": "10.x.x"
+  },
   "scripts": {
+    "start": "node dist/server.js",
+    "watch-server": "nodemon --watch src/**/* -e ts --exec ts-node ./src/server.ts",
     "test": "test"
   },
   "repository": {
@@ -13,7 +18,7 @@
   "keywords": [
     "slackbot",
     "bot",
-    "koa"
+    "api"
   ],
   "author": "Ben Stein",
   "license": "ISC",
