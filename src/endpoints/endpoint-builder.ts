@@ -1,16 +1,19 @@
 import Router from 'koa-router';
 import { RouteHandler } from "./route-handler";
+import { PersistService } from '../services/persist.service';
 
 export class EndpointBuilder {
     private _gets: RouteHandler[] = [];
     private _handlers: RouteHandler[] = [];
 
-    addEndpoint(THandler: { new(): RouteHandler }) {
-        this._handlers.push(new THandler());
+    constructor(private persist: PersistService) { }
+
+    addEndpoint(THandler: { new(persist: PersistService): RouteHandler }) {
+        this._handlers.push(new THandler(this.persist));
     }
 
-    addGet(THandler: { new(): RouteHandler }) {
-        this._gets.push(new THandler());
+    addGet(THandler: { new(persist: PersistService): RouteHandler }) {
+        this._gets.push(new THandler(this.persist));
     }
 
     build(router: Router) {

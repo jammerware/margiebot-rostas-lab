@@ -1,2 +1,6 @@
+# build/dist
 dist
 node_modules
+
+# keys
+service-account-key.json
