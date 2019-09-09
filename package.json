@@ -8,6 +8,8 @@
   },
   "scripts": {
     "start": "node dist/server.js",
+    "build": "tsc && copy package.json dist\\package.json && copy app.yaml dist\\app.yaml",
+    "deploy": "npm run build && gcloud app deploy",
     "watch-server": "nodemon --watch src/**/* -e ts --exec ts-node ./src/server.ts",
     "test": "test"
   },
