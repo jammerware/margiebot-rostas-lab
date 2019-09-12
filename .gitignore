@@ -4,3 +4,4 @@ node_modules
 
 # keys
 service-account-key.json
+.env

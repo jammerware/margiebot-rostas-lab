@@ -11,13 +11,14 @@ export class SlashPoint implements RouteHandler {
             console.log('body', ctx.request.body);
             ctx.body = {
                 response_type: 'in_channel',
-                text: `Awww, shucks. I bet ${ctx.request.body.user_name} sure appreciates that. They've got a brand new point!`,
+                callback_id: "view-scoreboard",
+                fallback: "See the scoreboard!",
                 blocks: [
                     {
-                        "type": "section",
-                        "text": {
+                        type: "section",
+                        text: {
                             "type": "mrkdwn",
-                            "text": `Awww, shucks. I bet ${ctx.request.body.user_name} sure appreciates that. They've got a brand new point!`,
+                            "text": `Awww, shucks. I bet ${ctx.request.body.user_name} sure appreciates **that**. They've got a brand new point!`,
                         }
                     },
                     {
@@ -25,6 +26,7 @@ export class SlashPoint implements RouteHandler {
                         "elements": [
                             {
                                 "type": "button",
+                                "action_id": "view-scoreboard",
                                 "text": {
                                     "type": "plain_text",
                                     "text": "See the scoreboard",
@@ -33,8 +35,8 @@ export class SlashPoint implements RouteHandler {
                             },
                         ]
                     }
-                ]
-            };
+                ],
+            }
 
             // await this.persist.givePoint("ben!");
             ctx.response.status = 200;

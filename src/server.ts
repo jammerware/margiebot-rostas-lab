@@ -1,17 +1,19 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import KoaBodyParser from 'koa-bodyparser';
+require('dotenv').config()
 import { IndexRoute } from './endpoints';
 import { SlashPoint } from './endpoints/slash/point';
 import { EndpointBuilder } from './endpoints/endpoint-builder';
 import { PersistService } from './services/persist.service';
 import { InteractiveComponentHandler } from './endpoints/general/interactive-component';
+import { SlackService } from './services/slack.service';
 
 const app = new Koa();
 const router = new Router();
 const port = process.env.PORT || 3000;
 
-const endpointBuilder = new EndpointBuilder(new PersistService());
+const endpointBuilder = new EndpointBuilder(new PersistService(), new SlackService());
 endpointBuilder.addGet(IndexRoute);
 endpointBuilder.addEndpoint(InteractiveComponentHandler);
 endpointBuilder.addEndpoint(SlashPoint);
@@ -21,8 +23,8 @@ endpointBuilder.build(router);
 app.use(KoaBodyParser());
 // then routes
 app.use(router.routes());
-console.log(router.routes());
 
+// start the engine
 app.listen(port);
 
 console.log(`Server running on localhost:${port}.`);
