@@ -8,6 +8,7 @@ import { EndpointBuilder } from './endpoints/endpoint-builder';
 import { PersistService } from './services/persist.service';
 import { InteractiveComponentHandler } from './endpoints/general/interactive-component';
 import { SlackService } from './services/slack.service';
+import { SlashScoreboard } from './endpoints/slash/scoreboard';
 
 const app = new Koa();
 const router = new Router();
@@ -17,6 +18,7 @@ const endpointBuilder = new EndpointBuilder(new PersistService(), new SlackServi
 endpointBuilder.addGet(IndexRoute);
 endpointBuilder.addEndpoint(InteractiveComponentHandler);
 endpointBuilder.addEndpoint(SlashPoint);
+endpointBuilder.addEndpoint(SlashScoreboard);
 endpointBuilder.build(router);
 
 // body parser has to come first

@@ -20,7 +20,7 @@ export class EndpointBuilder {
     }
 
     build(router: Router) {
-        for (const handler of this._handlers) {
+        for (const handler of this._gets) {
             router.get(handler.getRoute(), handler.getHandler());
         }
 

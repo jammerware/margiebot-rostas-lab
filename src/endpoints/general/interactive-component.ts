@@ -15,7 +15,7 @@ export class InteractiveComponentHandler implements RouteHandler {
 
             if (actionId === "view-scoreboard") {
                 // show scoreboardy things
-                this.slack.say("They want the scoreboard", payloadObject.channel.id);
+                await this.slack.say("hi", payloadObject.channel.id);
             }
 
             ctx.response.status = 200;
